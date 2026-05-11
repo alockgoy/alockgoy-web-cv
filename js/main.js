@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
 
-    $(".navbar-nav a").on('click', function (event) {
+    $(".navbar-nav a, .large-btn a, a[href^='#']").on('click', function (event) {
         if (this.hash !== "") {
             event.preventDefault();
             $('html, body').animate({ scrollTop: $(this.hash).offset().top - 30 }, 1500, 'easeInOutExpo');
