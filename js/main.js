@@ -75,5 +75,30 @@
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
         return false;
     });
-})(jQuery);
 
+    // Contact form submit with status alerts
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+        contactForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+                alert(result.message || "No se pudo completar la operación.");
+
+                if (response.ok && result.success) {
+                    contactForm.reset();
+                }
+            } catch (error) {
+                alert("Se produjo un error al enviar el mensaje. Inténtalo de nuevo.");
+            }
+        });
+    }
+})(jQuery);
